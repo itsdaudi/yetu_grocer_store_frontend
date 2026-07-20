@@ -27,7 +27,7 @@
 .product-emoji {
   font-size: 8rem;
   font-weight: 700;
-  color: #e67e22;
+  color: #2e7d32;
 }
 
 .product-detail-info {
@@ -67,7 +67,7 @@
 .price {
   font-size: 2rem;
   font-weight: 700;
-  color: #e67e22;
+  color: #2e7d32;
 }
 
 .stock-status {
@@ -130,7 +130,7 @@
 
 .add-to-cart-btn {
   padding: 1rem 2rem;
-  background: #e67e22;
+  background: #2e7d32;
   color: white;
   border: none;
   border-radius: 8px;
@@ -142,7 +142,7 @@
 }
 
 .add-to-cart-btn:hover:not(:disabled) {
-  background: #d35400;
+  background: #1b5e20;
   transform: scale(1.02);
 }
 
@@ -152,14 +152,14 @@
 }
 
 .back-to-products {
-  color: #e67e22;
+  color: #2e7d32;
   text-decoration: none;
   font-weight: 600;
   margin-top: 1rem;
 }
 
 .back-to-products:hover {
-  color: #d35400;
+  color: #1b5e20;
 }
 
 /* Loading */
@@ -185,7 +185,7 @@
 .back-link {
   display: inline-block;
   padding: 0.75rem 2rem;
-  background: #e67e22;
+  background: #2e7d32;
   color: white;
   text-decoration: none;
   border-radius: 8px;
@@ -194,7 +194,7 @@
 }
 
 .back-link:hover {
-  background: #d35400;
+  background: #1b5e20;
 }
 
 /* Responsive */

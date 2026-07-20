@@ -12,7 +12,7 @@
   padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #fef6e6 0%, #f8e8d0 100%);
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
   border-radius: 24px;
   margin-top: 2rem;
   margin-bottom: 3rem;
@@ -33,7 +33,7 @@
 }
 
 .hero-title span {
-  color: #e67e22;
+  color: #2e7d32;
 }
 
 .hero-subtitle {
@@ -46,7 +46,7 @@
 .hero-cta {
   display: inline-block;
   padding: 1rem 2.5rem;
-  background: #e67e22;
+  background: #2e7d32;
   color: white;
   font-weight: 600;
   border-radius: 50px;
@@ -56,15 +56,15 @@
 }
 
 .hero-cta:hover {
-  background: #d35400;
+  background: #1b5e20;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(230, 126, 34, 0.3);
+  box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
 }
 
 .hero-welcome {
   margin-top: 1.5rem;
   font-size: 1.1rem;
-  color: #2ecc71;
+  color: #2e7d32;
   font-weight: 600;
 }
 
@@ -78,8 +78,8 @@
 .hero-placeholder {
   font-size: 3rem;
   font-weight: 700;
-  color: #e67e22;
-  background: rgba(230, 126, 34, 0.1);
+  color: #2e7d32;
+  background: rgba(46, 125, 50, 0.1);
   padding: 3rem 4rem;
   border-radius: 16px;
   animation: float 3s ease-in-out infinite;
@@ -131,12 +131,13 @@
 .category-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  background: #e8f5e9;
 }
 
 .category-icon {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #e67e22;
+  color: #2e7d32;
   margin-bottom: 0.5rem;
 }
 
@@ -158,7 +159,7 @@
 }
 
 .view-all {
-  color: #e67e22;
+  color: #2e7d32;
   text-decoration: none;
   font-weight: 600;
 }
@@ -186,7 +187,7 @@
 .deal-image {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #e67e22;
+  color: #2e7d32;
   margin-bottom: 0.5rem;
 }
 
@@ -208,7 +209,7 @@
 .deal-price {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #e67e22;
+  color: #2e7d32;
 }
 
 .deal-original {
@@ -219,7 +220,7 @@
 
 .deal-add {
   padding: 0.6rem 2rem;
-  background: #e67e22;
+  background: #2e7d32;
   color: white;
   border: none;
   border-radius: 50px;
@@ -229,7 +230,7 @@
 }
 
 .deal-add:hover {
-  background: #d35400;
+  background: #1b5e20;
   transform: scale(1.05);
 }
 
@@ -256,7 +257,7 @@
 .feature-icon {
   font-size: 2rem;
   font-weight: 700;
-  color: #e67e22;
+  color: #2e7d32;
   margin-bottom: 1rem;
 }
 
