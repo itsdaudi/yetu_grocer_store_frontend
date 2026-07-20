@@ -9,10 +9,14 @@ import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
+import "./App.css";
 
 function App() {
+  const { user } = useAuth();
   return (
+    <div className="app">
     <>
+    <main className="app-content">  
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,7 +29,9 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+    </main>
     </>
+    </div>
   );
 }
 
