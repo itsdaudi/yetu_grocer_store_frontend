@@ -1,77 +1,53 @@
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
+import apiClient from "../api/client";
 import { useCart } from "../context/CartContext";
 import "./Products.css";
 
 export default function Products() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const { addToCart } = useCart();
+  const { addItem } = useCart();
 
-  // Filter states
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState(searchParams.get("category") || "");
-  const [sortBy, setSortBy] = useState("name");
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Sample products - in production these come from your backend
-  const sampleProducts = [
-    { id: 1, name: "Organic Apples", price: 350, category: "fruits", stock: 50, image: "🍎" },
-    { id: 2, name: "Fresh Milk", price: 250, category: "dairy", stock: 30, image: "🥛" },
-    { id: 3, name: "Avocado", price: 200, category: "fruits", stock: 25, image: "🥑" },
-    { id: 4, name: "Whole Chicken", price: 850, category: "meat", stock: 15, image: "🍗" },
-    { id: 5, name: "Sourdough Bread", price: 180, category: "bakery", stock: 20, image: "🍞" },
-    { id: 6, name: "Orange Juice", price: 300, category: "beverages", stock: 40, image: "🧃" },
-    { id: 7, name: "Tomatoes", price: 150, category: "vegetables", stock: 35, image: "🍅" },
-    { id: 8, name: "Cheddar Cheese", price: 450, category: "dairy", stock: 18, image: "🧀" },
-  ];
+  const category = searchParams.get("category") || "all";
+  const search = searchParams.get("search") || "";
+  const sort = searchParams.get("sort") || "";
 
+  // fetch categories once, on first load
   useEffect(() => {
-    // Simulate API call
-    setLoading(true);
-    setTimeout(() => {
-      setProducts(sampleProducts);
-      setLoading(false);
-    }, 500);
+    apiClient.get("/categories").then((res) => setCategories(res.data.categories));
   }, []);
 
-  // Filter and sort products
-  const filteredProducts = products
-    .filter((product) => {
-      const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
-      const matchesCategory = category ? product.category === category : true;
-      return matchesSearch && matchesCategory;
-    })
-    .sort((a, b) => {
-      if (sortBy === "name") return a.name.localeCompare(b.name);
-      if (sortBy === "price-low") return a.price - b.price;
-      if (sortBy === "price-high") return b.price - a.price;
-      return 0;
-    });
+  // re-fetch products whenever category, search, or sort changes
+  useEffect(() => {
+    setLoading(true);
+    const params = {};
+    if (category !== "all") params.category = category;
+    if (search) params.search = search;
+    if (sort) params.sort = sort;
 
-  const handleAddToCart = (product) => {
-    addToCart(product);
+    apiClient
+      .get("/products", { params })
+      .then((res) => setProducts(res.data.products))
+      .finally(() => setLoading(false));
+  }, [category, search, sort]);
+
+  const updateParam = (key, value) => {
+    const next = new URLSearchParams(searchParams);
+    if (value && value !== "all") {
+      next.set(key, value);
+    } else {
+      next.delete(key);
+    }
+    setSearchParams(next);
   };
 
-  const handleCategoryFilter = (cat) => {
-    setCategory(cat);
-    setSearchParams({ category: cat });
+  const handleAddToCart = (productId) => {
+    addItem(productId, 1);
   };
-
-  const clearFilters = () => {
-    setSearch("");
-    setCategory("");
-    setSearchParams({});
-  };
-
-  if (loading) {
-    return (
-      <div className="products-loading">
-        <div className="loader">Loading products...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="products-page">
@@ -80,83 +56,80 @@ export default function Products() {
         <p>Fresh, quality groceries delivered to your door</p>
       </div>
 
-      <div className="products-toolbar">
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+      <div className="products-controls">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => updateParam("search", e.target.value)}
+          className="products-search"
+        />
 
-        <div className="filter-group">
-          <select
-            value={category}
-            onChange={(e) => handleCategoryFilter(e.target.value)}
-          >
-            <option value="">All Categories</option>
-            <option value="fruits">Fruits</option>
-            <option value="vegetables">Vegetables</option>
-            <option value="dairy">Dairy</option>
-            <option value="meat">Meat</option>
-            <option value="bakery">Bakery</option>
-            <option value="beverages">Beverages</option>
-          </select>
+        <select
+          value={category}
+          onChange={(e) => updateParam("category", e.target.value)}
+          className="products-filter"
+        >
+          <option value="all">All Categories</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.slug}>
+              {c.name}
+            </option>
+          ))}
+        </select>
 
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <option value="name">Sort by Name</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-          </select>
-
-          {(search || category) && (
-            <button className="clear-filters" onClick={clearFilters}>
-              Clear Filters
-            </button>
-          )}
-        </div>
+        <select
+          value={sort}
+          onChange={(e) => updateParam("sort", e.target.value)}
+          className="products-sort"
+        >
+          <option value="">Featured</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+        </select>
       </div>
 
-      {filteredProducts.length === 0 ? (
-        <div className="no-products">
-          <p>No products found matching your criteria.</p>
-          <button onClick={clearFilters} className="clear-btn">
-            Clear Filters
-          </button>
-        </div>
+      {loading ? (
+        <p className="products-status">Loading products...</p>
+      ) : products.length === 0 ? (
+        <p className="products-status">No products found.</p>
       ) : (
         <div className="products-grid">
-          {filteredProducts.map((product) => (
+          {products.map((product) => (
             <div key={product.id} className="product-card">
-              <Link to={`/product/${product.id}`} className="product-link">
-                <div className="product-image">{product.image}</div>
-                <h3 className="product-name">{product.name}</h3>
-              </Link>
-              <div className="product-info">
-                <div className="product-price">KSh {product.price}</div>
-                <div className="product-stock">
-                  {product.stock > 0 ? (
-                    <span className="in-stock">In Stock ({product.stock})</span>
+              <Link to={`/products/${product.id}`} className="product-card-link">
+                <div className="product-card-image">
+                  {product.image_url ? (
+                    <img src={product.image_url} alt={product.name} />
                   ) : (
-                    <span className="out-of-stock">Out of Stock</span>
+                    <span>{product.name.charAt(0)}</span>
                   )}
                 </div>
+                <span className="product-card-category">{product.category}</span>
+                <h3 className="product-card-name">{product.name}</h3>
+                <p className="product-card-unit">{product.unit}</p>
+              </Link>
+
+              <div className="product-card-footer">
+                <div className="product-card-price">
+                  <span className="price-current">
+                    ${product.sale_price ?? product.price}
+                  </span>
+                  {product.sale_price && (
+                    <span className="price-original">${product.price}</span>
+                  )}
+                </div>
+                <button
+                  className="product-card-add"
+                  onClick={() => handleAddToCart(product.id)}
+                  disabled={product.stock_quantity < 1}
+                >
+                  {product.stock_quantity < 1 ? "Out of stock" : "Add"}
+                </button>
               </div>
-              <button
-                className="add-to-cart"
-                onClick={() => handleAddToCart(product)}
-                disabled={product.stock === 0}
-              >
-                {product.stock > 0 ? "Add to Cart" : "Sold Out"}
-              </button>
             </div>
           ))}
-        </div>
-      )}
+        </div>)}
     </div>
   );
 }
