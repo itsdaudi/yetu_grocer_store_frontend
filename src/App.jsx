@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
@@ -9,15 +10,10 @@ import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
-import { useAuth } from "./context/AuthContext";
-import "./App.css";
 
 function App() {
-  const { user } = useAuth();
   return (
-    <div className="app">
     <>
-    <main className="app-content">  
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -30,9 +26,8 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-    </main>
+      <Footer />
     </>
-    </div>
   );
 }
 
