@@ -1,26 +1,38 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+import apiClient from "../api/client";
 import "./Home.css";
 
 export default function Home() {
   const { user } = useAuth();
+  const { addItem } = useCart();
 
-  // Sample categories - these would come from your backend eventually
-  const categories = [
-    { id: 1, name: "Fruits", slug: "fruits" },
-    { id: 2, name: "Vegetables", slug: "vegetables" },
-    { id: 3, name: "Dairy", slug: "dairy" },
-    { id: 4, name: "Meat", slug: "meat" },
-    { id: 5, name: "Bakery", slug: "bakery" },
-    { id: 6, name: "Beverages", slug: "beverages" },
-  ];
+  const [categories, setCategories] = useState([]);
+  const [deals, setDeals] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Sample deals - these would come from your backend
-  const deals = [
-    { id: 1, name: "Organic Apples", price: 350, originalPrice: 500 },
-    { id: 2, name: "Fresh Milk", price: 180, originalPrice: 250 },
-    { id: 3, name: "Avocado", price: 120, originalPrice: 200 },
-  ];
+  useEffect(() => {
+    Promise.all([
+      apiClient.get("/categories"),
+      apiClient.get("/products?per_page=3"),
+    ])
+      .then(([categoriesRes, productsRes]) => {
+        setCategories(categoriesRes.data.categories);
+        // treat any product with a sale_price as a "deal" for the homepage
+        setDeals(productsRes.data.products);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handleAddToCart = (productId) => {
+    addItem(productId, 1);
+  };
+
+  if (loading) {
+    return <div className="home-page">Loading...</div>;
+  }
 
   return (
     <div className="home-page">
@@ -52,7 +64,11 @@ export default function Home() {
           <h2 className="section-title">Shop by Category</h2>
           <div className="categories-grid">
             {categories.map((category) => (
-              <Link to={`/products?category=${category.slug}`} key={category.id} className="category-card">
+              <Link
+                to={`/products?category=${category.slug}`}
+                key={category.id}
+                className="category-card"
+              >
                 <div className="category-icon">{category.name.charAt(0)}</div>
                 <span className="category-name">{category.name}</span>
               </Link>
@@ -69,15 +85,19 @@ export default function Home() {
             <Link to="/products" className="view-all">View All →</Link>
           </div>
           <div className="deals-grid">
-            {deals.map((deal) => (
-              <div key={deal.id} className="deal-card">
-                <div className="deal-image">{deal.name.charAt(0)}</div>
-                <h3 className="deal-name">{deal.name}</h3>
+            {deals.map((product) => (
+              <div key={product.id} className="deal-card">
+                <div className="deal-image">{product.name.charAt(0)}</div>
+                <h3 className="deal-name">{product.name}</h3>
                 <div className="deal-pricing">
-                  <span className="deal-price">KSh {deal.price}</span>
-                  <span className="deal-original">KSh {deal.originalPrice}</span>
+                  <span className="deal-price">${product.sale_price ?? product.price}</span>
+                  {product.sale_price && (
+                    <span className="deal-original">${product.price}</span>
+                  )}
                 </div>
-                <button className="deal-add">Add to Cart</button>
+                <button className="deal-add" onClick={() => handleAddToCart(product.id)}>
+                  Add to Cart
+                </button>
               </div>
             ))}
           </div>
@@ -92,7 +112,7 @@ export default function Home() {
             <div className="feature-card">
               <div className="feature-icon">FD</div>
               <h3>Free Delivery</h3>
-              <p>On orders over KSh 1,000</p>
+              <p>On orders over $25</p>
             </div>
             <div className="feature-card">
               <div className="feature-icon">FP</div>
