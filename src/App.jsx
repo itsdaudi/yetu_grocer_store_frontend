@@ -9,6 +9,7 @@ import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
+import { useAuth } from "./context/AuthContext";
 import "./App.css";
 
 function App() {
