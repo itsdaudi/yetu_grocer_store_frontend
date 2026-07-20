@@ -1,0 +1,132 @@
+.profile-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.profile-page h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.profile-tab {
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid transparent;
+}
+
+.profile-tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.profile-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.profile-field {
+  margin-bottom: 1.25rem;
+}
+
+.profile-field label {
+  display: block;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.profile-field input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+}
+
+.profile-save-btn {
+  padding: 0.7rem 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+.profile-success {
+  background: var(--color-secondary-tint);
+  color: var(--color-primary);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.address-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+}
+
+.address-card.is-default {
+  border-color: var(--color-primary);
+}
+
+.address-card-info strong {
+  display: block;
+}
+
+.address-default-badge {
+  font-size: 0.7rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.address-card-info span {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.address-card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.address-card-actions button {
+  font-size: 0.8rem;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.address-card-actions button.delete {
+  color: #dc2626;
+}
+
+.add-address-btn {
+  padding: 0.6rem 1rem;
+  background: white;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  width: 100%;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-top: 0.5rem;
+}
