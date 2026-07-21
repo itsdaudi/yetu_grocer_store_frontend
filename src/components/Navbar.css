@@ -137,3 +137,37 @@
   font-weight: 500;
   font-size: 0.9rem;
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .navbar-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .navbar-search {
+    order: 2;
+    max-width: none;
+    flex: 1 1 100%;
+  }
+
+  .navbar-actions {
+    gap: 0.6rem;
+  }
+
+  .navbar-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .navbar-user-name {
+    display: none;
+  }
+}
