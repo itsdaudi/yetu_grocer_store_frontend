@@ -4,6 +4,7 @@ import apiClient from "../api/client";
 import { useCart } from "../context/CartContext";
 import "./Products.css";
 import Spinner from "../components/Spinner";
+import EmptyState from "../components/EmptyState";
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -92,9 +93,13 @@ export default function Products() {
 
       {loading ? (
   <Spinner />
-) : products.length === 0 ?  (
-        <p className="products-status">No products found.</p>
-      ) : (
+) : products.length === 0 ? (
+  <EmptyState
+    icon="🔍"
+    title="No products found"
+    message="Try adjusting your search or filters."
+  />
+) : (
         <div className="products-grid">
           {products.map((product) => (
             <div key={product.id} className="product-card">

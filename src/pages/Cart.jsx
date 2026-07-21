@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import "./Cart.css";
 import Spinner from "../components/Spinner";
+import EmptyState from "../components/EmptyState";
 
 export default function Cart() {
   const { cart, loading, updateItem, removeItem } = useCart();
@@ -15,10 +16,13 @@ export default function Cart() {
     return (
       <div className="cart-page">
         <h1>Your Cart</h1>
-        <div className="cart-empty">
-          <p>Your cart is empty.</p>
-          <Link to="/products">Browse products →</Link>
-        </div>
+        <EmptyState
+          icon="🛒"
+          title="Your cart is empty"
+          message="Looks like you haven't added anything yet."
+          actionLabel="Browse Products"
+          actionTo="/products"
+/>  
       </div>
     );
   }

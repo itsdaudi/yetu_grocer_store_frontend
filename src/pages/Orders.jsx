@@ -4,6 +4,7 @@ import apiClient from "../api/client";
 import { useCart } from "../context/CartContext";
 import "./Orders.css";
 import Spinner from "../components/Spinner";
+import EmptyState from "../components/EmptyState";
 
 const TABS = [
   { key: "all", label: "All" },
@@ -81,8 +82,14 @@ export default function Orders() {
       </div>
 
       {filteredOrders.length === 0 ? (
-        <div className="orders-empty">No orders in this category yet.</div>
-      ) : (
+  <EmptyState
+    icon="📋"
+    title="No orders yet"
+    message="Your order history will show up here."
+    actionLabel="Start Shopping"
+    actionTo="/products"
+  />
+) : (
         filteredOrders.map((order) => (
           <div key={order.id} className="order-card">
             <div className="order-card-header">
