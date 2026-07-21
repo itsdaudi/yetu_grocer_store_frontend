@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import apiClient from "../api/client";
 import { useCart } from "../context/CartContext";
 import "./ProductDetail.css";
+import Spinner from "../components/Spinner";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ export default function ProductDetail() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <div className="product-detail-page">Loading...</div>;
+  if (loading) return <Spinner />;
   if (!product) return <div className="product-detail-page">Product not found.</div>;
 
   const inStock = product.stock_quantity > 0;

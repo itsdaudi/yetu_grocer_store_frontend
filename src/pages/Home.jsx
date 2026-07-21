@@ -24,7 +24,7 @@ export default function Home() {
         // treat any product with a sale_price as a "deal" for the homepage
         setDeals(productsRes.data.products);
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoading(false))
   }, []);
 
   const handleAddToCart = (productId) => {
