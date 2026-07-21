@@ -87,15 +87,35 @@ export default function Home() {
           <div className="deals-grid">
             {deals.map((product) => (
               <div key={product.id} className="deal-card">
-                <div className="deal-image">{product.name.charAt(0)}</div>
+                <div className="deal-image">
+                  {product.image_url ? (
+                    <img
+                      src={product.image_url}
+                      alt={product.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "12px",
+                      }}
+                    />
+                  ) : (
+                    product.name.charAt(0)
+                  )}
+                </div>
                 <h3 className="deal-name">{product.name}</h3>
                 <div className="deal-pricing">
-                  <span className="deal-price">${product.sale_price ?? product.price}</span>
+                  <span className="deal-price">
+                    ${product.sale_price ?? product.price}
+                  </span>
                   {product.sale_price && (
                     <span className="deal-original">${product.price}</span>
                   )}
                 </div>
-                <button className="deal-add" onClick={() => handleAddToCart(product.id)}>
+                <button
+                  className="deal-add"
+                  onClick={() => handleAddToCart(product.id)}
+                >
                   Add to Cart
                 </button>
               </div>
