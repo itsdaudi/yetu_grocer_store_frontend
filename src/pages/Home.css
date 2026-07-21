@@ -124,7 +124,7 @@
   text-align: center;
   text-decoration: none;
   color: #1a1a2e;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 

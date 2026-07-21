@@ -36,3 +36,15 @@ button {
   font-family: inherit;
   cursor: pointer;
 }
+
+button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+}
+
+button:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+a {
+  transition: color 0.15s ease;
+}

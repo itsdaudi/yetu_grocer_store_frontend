@@ -40,6 +40,12 @@
   font-weight: 500;
   color: var(--color-text);
   padding: 0.5rem 0;
+  transition: color 0.15s ease;
+
+}
+
+.navbar-link:hover {
+  color: var(--color-primary);
 }
 
 .navbar-link.active {
@@ -116,6 +122,10 @@
 .navbar-btn-primary {
   background: var(--color-primary);
   color: var(--color-white);
+}
+
+.navbar-btn-primary:hover {
+  background: #1a5f3d;
 }
 
 .navbar-btn-ghost {
