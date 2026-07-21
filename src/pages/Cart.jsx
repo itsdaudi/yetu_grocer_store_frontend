@@ -1,13 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import "./Cart.css";
+import Spinner from "../components/Spinner";
 
 export default function Cart() {
   const { cart, loading, updateItem, removeItem } = useCart();
   const navigate = useNavigate();
 
   if (loading) {
-    return <div className="cart-page">Loading cart...</div>;
+    return <Spinner />;
   }
 
   if (!cart || cart.items.length === 0) {

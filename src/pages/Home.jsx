@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import apiClient from "../api/client";
 import "./Home.css";
+import Spinner from "../components/Spinner";
 
 export default function Home() {
   const { user } = useAuth();
@@ -30,10 +31,9 @@ export default function Home() {
     addItem(productId, 1);
   };
 
-  if (loading) {
-    return <div className="home-page">Loading...</div>;
-  }
-
+if (loading) {
+  return <Spinner />;
+}
   return (
     <div className="home-page">
       {/* Hero Section */}

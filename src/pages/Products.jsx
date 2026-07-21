@@ -3,6 +3,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import apiClient from "../api/client";
 import { useCart } from "../context/CartContext";
 import "./Products.css";
+import Spinner from "../components/Spinner";
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -90,8 +91,8 @@ export default function Products() {
       </div>
 
       {loading ? (
-        <p className="products-status">Loading products...</p>
-      ) : products.length === 0 ? (
+  <Spinner />
+) : products.length === 0 ?  (
         <p className="products-status">No products found.</p>
       ) : (
         <div className="products-grid">

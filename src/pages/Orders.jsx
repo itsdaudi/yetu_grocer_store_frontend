@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import apiClient from "../api/client";
 import { useCart } from "../context/CartContext";
 import "./Orders.css";
+import Spinner from "../components/Spinner";
 
 const TABS = [
   { key: "all", label: "All" },
@@ -61,7 +62,7 @@ export default function Orders() {
     );
   };
 
-  if (loading) return <div className="orders-page">Loading orders...</div>;
+  if (loading) return <Spinner />;
 
   return (
     <div className="orders-page">
