@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import apiClient from "../api/client";
-import "./Home.css";
 import Spinner from "../components/Spinner";
+import "./Home.css";
 
 export default function Home() {
   const { user } = useAuth();
@@ -21,19 +21,19 @@ export default function Home() {
     ])
       .then(([categoriesRes, productsRes]) => {
         setCategories(categoriesRes.data.categories);
-        // treat any product with a sale_price as a "deal" for the homepage
         setDeals(productsRes.data.products);
       })
-      .finally(() => setLoading(false))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleAddToCart = (productId) => {
     addItem(productId, 1);
   };
 
-if (loading) {
-  return <Spinner />;
-}
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <div className="home-page">
       {/* Hero Section */}
@@ -54,7 +54,39 @@ if (loading) {
           )}
         </div>
         <div className="hero-image">
-          <div className="hero-placeholder">GROCERIES</div>
+          <img
+            src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800"
+            alt="Fresh groceries"
+            className="hero-photo"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "https://picsum.photos/seed/groceries/800/600";
+            }}
+          />
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="features-section">
+        <div className="container">
+          <h2 className="section-title">Why Shop With Us</h2>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">FD</div>
+              <h3>Free Delivery</h3>
+              <p>On orders over $25</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">FP</div>
+              <h3>Fresh Produce</h3>
+              <p>Sourced directly from farms</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">BP</div>
+              <h3>Best Prices</h3>
+              <p>Affordable groceries every day</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -120,30 +152,6 @@ if (loading) {
                 </button>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="features-section">
-        <div className="container">
-          <h2 className="section-title">Why Shop With Us</h2>
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon">FD</div>
-              <h3>Free Delivery</h3>
-              <p>On orders over $25</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">FP</div>
-              <h3>Fresh Produce</h3>
-              <p>Sourced directly from farms</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">BP</div>
-              <h3>Best Prices</h3>
-              <p>Affordable groceries every day</p>
-            </div>
           </div>
         </div>
       </section>
