@@ -6,6 +6,17 @@ import apiClient from "../api/client";
 import Spinner from "../components/Spinner";
 import "./Home.css";
 
+const categoryImages = {
+  vegetables: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=200",
+  fruits: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=200",
+  dairy: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200",
+  bakery: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200",
+  meat: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=200",
+  beverages: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=200",
+  snacks: "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=200",
+};
+
+
 export default function Home() {
   const { user } = useAuth();
   const { addItem } = useCart();
@@ -96,14 +107,26 @@ export default function Home() {
           <h2 className="section-title">Shop by Category</h2>
           <div className="categories-grid">
             {categories.map((category) => (
-              <Link
-                to={`/products?category=${category.slug}`}
-                key={category.id}
-                className="category-card"
-              >
-                <div className="category-icon">{category.name.charAt(0)}</div>
-                <span className="category-name">{category.name}</span>
-              </Link>
+              
+
+             <Link
+  to={`/products?category=${category.slug}`}
+  key={category.id}
+  className="category-card"
+>
+  <div className="category-icon">
+    <img
+      src={categoryImages[category.slug]}
+      alt={category.name}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = `https://picsum.photos/seed/${category.slug}/200/200`;
+      }}
+    />
+  </div>
+  <span className="category-name">{category.name}</span>
+</Link>
+              
             ))}
           </div>
         </div>

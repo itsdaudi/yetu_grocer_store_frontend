@@ -73,16 +73,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 300px;
 }
 
-.hero-placeholder {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #2e7d32;
-  background: rgba(46, 125, 50, 0.1);
-  padding: 3rem 4rem;
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  object-fit: cover;
   border-radius: 16px;
-  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
 @keyframes float {
@@ -135,17 +135,24 @@
 }
 
 .category-icon {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #2e7d32;
-  margin-bottom: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 0.85rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.2s ease;
 }
 
-.category-name {
-  font-weight: 600;
-  font-size: 1rem;
+.category-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
+
+.category-card:hover .category-icon {
+  transform: scale(1.05);
+}
 /* Deals */
 .deals-section {
   padding: 3rem 0;
