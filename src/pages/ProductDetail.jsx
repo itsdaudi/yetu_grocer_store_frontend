@@ -24,7 +24,7 @@ export default function ProductDetail() {
   }, [id]);
 
   if (loading) return <Spinner />;
-  if (!product) return <div className="product-detail-page">Product not found.</div>;
+  if (!product) return <EmptyState title="Product not found" />;
 
   const inStock = product.stock_quantity > 0;
 
