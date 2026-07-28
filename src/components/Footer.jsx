@@ -11,6 +11,10 @@ export default function Footer() {
     setSubscribed(true);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <footer className="footer">
       <div className="footer-newsletter">
@@ -44,32 +48,32 @@ export default function Footer() {
 
         <div className="footer-col">
           <h4>Shop</h4>
-          <Link to="/products">All Products</Link>
-          <Link to="/products?category=vegetables">Vegetables</Link>
-          <Link to="/products?category=fruits">Fruits</Link>
-          <Link to="/products?category=dairy">Dairy</Link>
+          <Link to="/products" onClick={scrollToTop}>All Products</Link>
+          <Link to="/products?category=vegetables" onClick={scrollToTop}>Vegetables</Link>
+          <Link to="/products?category=fruits" onClick={scrollToTop}>Fruits</Link>
+          <Link to="/products?category=dairy" onClick={scrollToTop}>Dairy</Link>
         </div>
 
         <div className="footer-col">
           <h4>Company</h4>
-          <Link to="/">About Us</Link>
-          <Link to="/">Careers</Link>
-          <Link to="/">Blog</Link>
+          <Link to="/" onClick={scrollToTop}>About Us</Link>
+          <Link to="/" onClick={scrollToTop}>Careers</Link>
+          <Link to="/" onClick={scrollToTop}>Blog</Link>
         </div>
 
         <div className="footer-col">
           <h4>Support</h4>
-          <Link to="/">Help Center</Link>
-          <Link to="/orders">Track Order</Link>
-          <Link to="/">Contact Us</Link>
+          <Link to="/" onClick={scrollToTop}>Help Center</Link>
+          <Link to="/orders" onClick={scrollToTop}>Track Order</Link>
+          <Link to="/" onClick={scrollToTop}>Contact Us</Link>
         </div>
       </div>
 
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Yetu. All rights reserved.</span>
         <div className="footer-bottom-links">
-          <Link to="/">Privacy Policy</Link>
-          <Link to="/">Terms of Service</Link>
+          <Link to="/" onClick={scrollToTop}>Privacy Policy</Link>
+          <Link to="/" onClick={scrollToTop}>Terms of Service</Link>
         </div>
       </div>
     </footer>
