@@ -10,10 +10,13 @@ import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <>
+      <ScrollToTop /> 
+
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
