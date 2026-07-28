@@ -1,16 +1,35 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import { useState } from "react";
 
 export default function Footer() {
-  return (
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+const handleSubscribe = (e) => {
+  e.preventDefault();
+  setSubscribed(true);
+};
     <footer className="footer">
       <div className="footer-newsletter">
         <h3>Get 15% off your first order</h3>
         <p>Subscribe for exclusive deals, seasonal produce guides, and healthy recipes.</p>
-        <div className="footer-newsletter-form">
-          <input type="email" placeholder="Enter your email" />
-          <button>Subscribe</button>
-        </div>
+        <form className="footer-newsletter-form" onSubmit={handleSubscribe}>
+  {subscribed ? (
+    <p className="footer-newsletter-success">Thankyou for subscribing Yetu! 🎉</p>
+  ) : (
+    <>
+      <input
+        type="email"
+        placeholder="Enter your email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <button type="submit">Subscribe</button>
+    </>
+  )}
+</form>
       </div>
 
       <div className="footer-main">
@@ -51,6 +70,5 @@ export default function Footer() {
           <Link to="/">Terms of Service</Link>
         </div>
       </div>
-    </footer>
-  );
+      </footer>
 }
