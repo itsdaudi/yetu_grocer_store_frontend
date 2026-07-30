@@ -44,6 +44,14 @@ export default function Navbar() {
             Orders
           </NavLink>
         )}
+        {user?.role === "admin" && (
+          <NavLink
+            to="/admin/orders"
+            className={({ isActive }) => `navbar-link${isActive ? " active" : ""}`}
+          >
+            Admin
+          </NavLink>
+        )}
       </div>
 
       <div className="navbar-search">
