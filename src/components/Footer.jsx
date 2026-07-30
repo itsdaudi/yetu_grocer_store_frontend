@@ -17,25 +17,27 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      <div className="footer-newsletter">
-        <h3>Get 15% off your first order</h3>
-        <p>Subscribe for exclusive deals, seasonal produce guides, and healthy recipes.</p>
-        <form className="footer-newsletter-form" onSubmit={handleSubscribe}>
-          {subscribed ? (
-            <p className="footer-newsletter-success">Thank you for subscribing to Yetu! 🎉</p>
-          ) : (
-            <>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <button type="submit">Subscribe</button>
-            </>
-          )}
-        </form>
+      <div className="footer-newsletter-wrapper">
+        <div className="footer-newsletter">
+          <h3>Get 15% off your first order</h3>
+          <p>Subscribe for exclusive deals, seasonal produce guides, and healthy recipes.</p>
+          <form className="footer-newsletter-form" onSubmit={handleSubscribe}>
+            {subscribed ? (
+              <p className="footer-newsletter-success">Thank you for subscribing to Yetu! 🎉</p>
+            ) : (
+              <>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <button type="submit">Subscribe</button>
+              </>
+            )}
+          </form>
+        </div>
       </div>
 
       <div className="footer-main">

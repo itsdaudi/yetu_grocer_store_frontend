@@ -11,6 +11,8 @@ import Profile from "./pages/Profile";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import ScrollToTop from "./components/ScrollToTop";
+import AdminOrders from "./pages/AdminOrders";
+import AdminRoute from "./components/AdminRoute";
 
 function App() {
   return (
@@ -28,6 +30,15 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin/orders" element={<AdminOrders />} />
+        <Route
+          path="/admin/orders"
+          element={
+            <AdminRoute>
+              <AdminOrders />
+            </AdminRoute>
+  }
+/>
       </Routes>
       <Footer />
     </>
