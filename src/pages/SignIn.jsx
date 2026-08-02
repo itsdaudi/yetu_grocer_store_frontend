@@ -5,6 +5,7 @@ import "./SignIn.css";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -49,18 +50,23 @@ export default function SignIn() {
 
           <div className="auth-field">
             <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <button className="auth-submit" type="submit" disabled={submitting}>
-            {submitting ? "Signing in..." : "Sign In"}
-          </button>
+         <div className="password-input-wrapper">
+           <input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+        />
+    <button
+      type="button"
+      className="password-toggle"
+      onClick={() => setShowPassword(!showPassword)}
+    >
+      {showPassword ? "Hide" : "Show"}
+    </button>
+  </div>
+</div>
         </form>
 
         <p className="auth-footer">
